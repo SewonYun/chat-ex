@@ -1,18 +1,18 @@
 package com.chattingexcercis.sewonyun.application.controller
 
+import com.chattingexcercis.sewonyun.application.domain.User
 import jakarta.servlet.http.HttpSession
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/user")
 class UserController {
 
-    @PostMapping("/login")
-    fun login(session: HttpSession): String {
-        return "User logged in and session attributes set."
+    @PostMapping("/join")
+    fun join(@RequestParam nickName: String): String {
+        User(nickName = nickName)
+//        userRepository.save(user)
+        return "redirect:/"
     }
 
     @GetMapping("/info")

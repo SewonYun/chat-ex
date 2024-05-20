@@ -17,6 +17,7 @@ import org.springframework.kafka.core.*
 internal class KafkaConfig {
     @Value(value = "\${spring.kafka.bootstrap-servers}")
     lateinit var bootstrapAddress: String
+
     @Bean
     fun consumerFactory(): ConsumerFactory<String, String> {
         val props: MutableMap<String, Any?> = HashMap()

@@ -12,10 +12,10 @@ import org.springframework.kafka.annotation.EnableKafka
 class SewonyunApplication
 
 fun main(args: Array<String>) {
-	runApplication<SewonyunApplication>(*args)
+    runApplication<SewonyunApplication>(*args)
 }
 
 @Bean
 fun kafkaConsumer(): TopicConsumer {
-	return TopicConsumer()
+    return TopicConsumer()
 }
