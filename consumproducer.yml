@@ -14,4 +14,17 @@ spec:
     spec:
       containers:
       - name: consumer
-        image: localhost:5252/consumer
+        image: localhost:5252/consumproducer:latest
+        env:
+        - name: ENV-DATASTORE
+          value: "datastore-service"
+        - name: ENV-DATASTORE-PORT
+          value: "3306"
+        - name: ENV-REDIS
+          value: "redis"
+        - name: ENV-REDIS-PORT
+          value: "6379"
+        - name: ENV-KAFKA
+          value: "kafka-0"
+        - name: ENV-KAFKA-PORT
+          value: "9093"

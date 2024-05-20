@@ -23,10 +23,13 @@ kind: Service
 metadata:
   name: redis
 spec:
+  type: NodePort
   selector:
     app: redis
   ports:
     - protocol: TCP
+      name: redis-port
       port: 6379
       targetPort: 6379
+      nodePort: 30004
 
