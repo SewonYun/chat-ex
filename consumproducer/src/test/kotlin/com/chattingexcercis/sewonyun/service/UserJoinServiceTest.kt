@@ -1,16 +1,13 @@
 package com.chattingexcercis.sewonyun.service
 
-import arrow.core.Either
+import arrow.core.left
 import arrow.core.right
 import com.chattingexcercis.sewonyun.application.domain.User
 import com.chattingexcercis.sewonyun.application.repository.UserRepository
 import io.mockk.every
 import io.mockk.mockk
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 
 class UserJoinServiceTest {
 
@@ -40,7 +37,6 @@ class UserJoinServiceTest {
         val result = userJoinService.saveUser(nickName)
 
         // then
-        assertEquals(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .body(mapOf("success" to false, "message" to "가입에 실패했습니다.")), result)
+        assertEquals("가입에 실패했습니다.".left(), result)
     }
 }
