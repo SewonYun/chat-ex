@@ -23,8 +23,10 @@ source apply-pods.sh @쿠버네티스 팟 초기화 및 등록<br>
 ---
 
 # Mono repository style git structure
-<h2>Producer</h2>
+<h2>Consumproducer</h2>
     Kakfa client (채팅방 개설시 새 토픽 발행)
+    Kakfa client, web client(js), 컨슈밍 웹소켓 연계,
+    redis session, redis sorted set
 <h2>Broker</h2>
     Apache Kafaka (version),
     Clustering (Zookeeper),
@@ -33,8 +35,6 @@ source apply-pods.sh @쿠버네티스 팟 초기화 및 등록<br>
     Commit,
     Failover,
     Trusted event persistence (kafka default value change to  version)
-<h2>Consumer</h2>
-    Kakfa client, web client(js), 컨슈밍 웹소켓 연계
 <h2>Data</h2>
     Mysql, JPA transaction, Redis (채팅방 목록 캐싱 & 내림차순)
 
