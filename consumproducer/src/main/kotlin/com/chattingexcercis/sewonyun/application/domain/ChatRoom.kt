@@ -9,23 +9,23 @@ import java.sql.Timestamp
 data class ChatRoom(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private val id: Long? = null,
+    val id: Long? = null,
 
     @Column(nullable = false, length = 50)
-    private val roomName: String? = null,
+    val roomName: String? = null,
 
     @Column(nullable = false, length = 50)
-    private val roomMakerId: Long? = null,
+    val roomMakerId: Long? = null,
 
     @ColumnDefault("0")
     @Column(nullable = false)
-    private val isActiveRoom: Long = 0,
+    val isActiveRoom: Long = 0,
 
     @ColumnDefault("0")
     @Column(nullable = false)
-    private val userCount: Long = 0,
+    val userCount: Long = 0,
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
-    private val cratedAt: Timestamp? = null
+    val cratedAt: Timestamp? = null
 )
