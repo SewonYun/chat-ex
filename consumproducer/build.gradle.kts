@@ -43,6 +43,9 @@ dependencies {
 	implementation ("com.mysql:mysql-connector-j")
 	implementation("io.arrow-kt:arrow-core:1.2.4")
 	implementation("io.arrow-kt:arrow-fx-coroutines:1.2.4")
+
+	testImplementation("io.mockk:mockk:1.12.0")
+
 }
 
 tasks.withType<KotlinCompile> {
