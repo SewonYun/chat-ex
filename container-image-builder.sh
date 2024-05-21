@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 하위 디렉토리 목록
-directories=("consumproducer" "mysql-volume" "front")
+directories=("consumproducer" "mysql-volume" )
 
 # 각 디렉토리 빌드
 for directory in "${directories[@]}"
