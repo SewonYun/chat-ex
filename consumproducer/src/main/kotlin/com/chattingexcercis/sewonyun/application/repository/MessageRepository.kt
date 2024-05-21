@@ -4,4 +4,7 @@ import com.chattingexcercis.sewonyun.application.domain.Message
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface MessageRepository : JpaRepository<Message, Long> {
+
+    fun findAllByChatRoomId(chatRoomId: Long): List<Message>
+
 }

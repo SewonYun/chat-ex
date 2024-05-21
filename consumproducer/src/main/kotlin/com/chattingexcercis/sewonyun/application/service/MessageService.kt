@@ -12,4 +12,8 @@ class MessageService(@Autowired private val messageRepository: MessageRepository
         return runCatching { messageRepository.save(message) }
     }
 
+    fun getList(chatRoomId: Long): Result<List<Message>> {
+        return runCatching { messageRepository.findAllByChatRoomId(chatRoomId = chatRoomId) }
+    }
+
 }

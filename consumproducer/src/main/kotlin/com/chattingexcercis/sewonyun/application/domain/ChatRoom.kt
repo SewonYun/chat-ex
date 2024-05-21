@@ -27,5 +27,17 @@ data class ChatRoom(
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
-    val cratedAt: Timestamp? = null
+    val cratedAt: Timestamp? = null,
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chatRoomId", referencedColumnName = "id")
+    val messageList: List<Message> = listOf(),
+
+    @Transient
+    val recentMessage: Message? = null,
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chatRoomId", referencedColumnName = "id")
+    val chatRoomUserRelation: List<ChatRoomUserRelation>? = null
+
 )

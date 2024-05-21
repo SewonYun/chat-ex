@@ -32,4 +32,9 @@ class UserController {
         )
     }
 
+    @GetMapping("/id")
+    fun getId(session: HttpSession): ResponseEntity<Any> {
+        return ResponseEntity.ok(mapOf("success" to true, "data" to session.getAttribute("userId")))
+    }
+
 }

@@ -26,5 +26,9 @@ data class ChatRoomUserRelation(
     val updatedAt: Timestamp? = null,
 
     @Column
-    val leftAt: Timestamp? = null
+    val leftAt: Timestamp? = null,
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", referencedColumnName = "userId")
+    val user: User? = null
 )

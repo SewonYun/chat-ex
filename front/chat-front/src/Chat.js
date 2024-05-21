@@ -2,25 +2,53 @@ import React, { useState, useEffect } from 'react';
 import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import _debounce from 'lodash/debounce';
+import { useLocation } from 'react-router-dom';
 import './App.css';
+import axios from 'axios';
 
 function Chat() {
     const [messages, setMessages] = useState([]);
     const [stompClientPub, setStompClientPub] = useState(null);
     const [value, setValue] = useState('');
+    const [userId, setUserId] = useState(null);
 
-    const chatRoomId = 456;
-    const userId = 1;
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
 
+    const chatRoomId  = queryParams.get('roomId');
     const TOPIC_PUBLISH = `/app/chat/publish/${chatRoomId}`;
     const TOPIC_SUBSCRIBE = `/topic/chat/${chatRoomId}`;
 
+    const initHistory = () => {
+        axios.get('http://localhost:30006/chatting/list', {
+            params: {
+                chatRoomId: chatRoomId
+            }
+        })
+        .then(response => {
+            setMessages(response.data.data)
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        })
+    }
+
+    const getUserId = () => {
+        axios.get('http://localhost:30006/user/id')
+        .then(response => {
+            setUserId(response.data.data)
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        })
+    }
 
     useEffect(() => {
 
+        getUserId()
         const socketPub = new SockJS('http://localhost:30006/ws-chat-pub');
         const clientPub = Stomp.over(socketPub);
-
+        initHistory()
         clientPub.connect({}, () => {
             console.log('Publisher WebSocket 연결됨!');
             setStompClientPub(clientPub);
@@ -55,8 +83,8 @@ function Chat() {
     const sendMessage = (message) => {
         if (stompClientPub && stompClientPub.connected) {
             stompClientPub.send(TOPIC_PUBLISH, {}, JSON.stringify({
-                id: 1,
-                userId: 123,
+                id: null,
+                userId: userId,
                 chatRoomId: chatRoomId,
                 message: message,
                 createdAt: new Date().toISOString()

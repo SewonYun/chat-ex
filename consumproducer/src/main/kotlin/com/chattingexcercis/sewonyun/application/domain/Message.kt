@@ -12,7 +12,7 @@ data class Message(
     val id: Long?,
 
     @Column(nullable = false, length = 50)
-    val userId: Long,
+    val userId: Long?,
 
     @Column(nullable = false, length = 50)
     val chatRoomId: Long,

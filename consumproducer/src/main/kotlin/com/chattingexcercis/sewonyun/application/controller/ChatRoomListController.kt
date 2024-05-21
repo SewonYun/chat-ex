@@ -26,7 +26,9 @@ class ChatRoomListController(
 
         return result.fold(
             { roomList ->
-                ResponseEntity.ok(mapOf("success" to true, "data" to roomList))
+                ResponseEntity.ok(mapOf("success" to true, "data" to roomList.map {
+                    it.copy(recentMessage = it.messageList.lastOrNull())
+                }.sortedByDescending { it.userCount }))
             },
             { errorMessage ->
                 ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -45,7 +47,12 @@ class ChatRoomListController(
             { chatRoom ->
 
                 enterChatRoomService.getList().onSuccess {
-                    kafkaTemplateForChatRoom.send(KafkaTopicConfig.CHAT_LIST_TOPIC, "11", it)
+                    kafkaTemplateForChatRoom.send(
+                        KafkaTopicConfig.CHAT_LIST_TOPIC,
+                        "1",
+                        it.map {
+                            it.copy(recentMessage = it.messageList.lastOrNull())
+                        }.sortedByDescending { it.userCount })
                 }
                 ResponseEntity.ok(mapOf("success" to true, "data" to chatRoom))
             },
