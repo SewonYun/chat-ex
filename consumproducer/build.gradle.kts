@@ -45,6 +45,7 @@ dependencies {
 	implementation("io.arrow-kt:arrow-fx-coroutines:1.2.4")
 
 	testImplementation("io.mockk:mockk:1.12.0")
+	testImplementation("com.ninja-squad:springmockk:3.0.1")
 
 }
 
