@@ -1,7 +1,7 @@
 package com.chattingexcercis.sewonyun.application.controller
 
-import com.chattingexcercis.sewonyun.service.ChatRoomService
-import com.chattingexcercis.sewonyun.service.EnterChatRoomService
+import com.chattingexcercis.sewonyun.application.service.ChatRoomService
+import com.chattingexcercis.sewonyun.application.service.EnterChatRoomService
 import jakarta.servlet.http.HttpSession
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus

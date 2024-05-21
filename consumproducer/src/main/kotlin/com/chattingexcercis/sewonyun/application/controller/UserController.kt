@@ -1,6 +1,6 @@
 package com.chattingexcercis.sewonyun.application.controller
 
-import com.chattingexcercis.sewonyun.service.UserJoinService
+import com.chattingexcercis.sewonyun.application.service.UserJoinService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

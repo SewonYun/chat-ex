@@ -1,7 +1,7 @@
 package com.chattingexcercis.sewonyun.application.controller
 
 import com.chattingexcercis.sewonyun.application.domain.ChatRoom
-import com.chattingexcercis.sewonyun.service.EnterChatRoomService
+import com.chattingexcercis.sewonyun.application.service.EnterChatRoomService
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito.`when`

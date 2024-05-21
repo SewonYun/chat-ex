@@ -1,7 +1,7 @@
 package com.chattingexcercis.sewonyun.application.controller
 
 import com.chattingexcercis.sewonyun.application.domain.ChatRoomUserRelation
-import com.chattingexcercis.sewonyun.service.EnterChatRoomService
+import com.chattingexcercis.sewonyun.application.service.EnterChatRoomService
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
 import org.junit.jupiter.api.BeforeEach

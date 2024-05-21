@@ -1,5 +1,6 @@
 package com.chattingexcercis.sewonyun.application.config
 
+import com.chattingexcercis.sewonyun.application.domain.Message
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.common.serialization.StringDeserializer
@@ -19,7 +20,7 @@ internal class KafkaConfig {
     lateinit var bootstrapAddress: String
 
     @Bean
-    fun consumerFactory(): ConsumerFactory<String, String> {
+    fun consumerFactory(): ConsumerFactory<String, Message> {
         val props: MutableMap<String, Any?> = HashMap()
         props[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapAddress
         props[ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG] = StringDeserializer::class.java
@@ -28,15 +29,14 @@ internal class KafkaConfig {
     }
 
     @Bean
-    fun kafkaListenerContainerFactory(): ConcurrentKafkaListenerContainerFactory<String, String> {
-        val factory = ConcurrentKafkaListenerContainerFactory<String, String>()
+    fun kafkaListenerContainerFactory(): ConcurrentKafkaListenerContainerFactory<String, Message> {
+        val factory = ConcurrentKafkaListenerContainerFactory<String, Message>()
         factory.consumerFactory = consumerFactory()
         return factory
     }
 
-    // Producer Factory 설정
     @Bean
-    fun producerFactory(): ProducerFactory<String, String> {
+    fun producerFactory(): ProducerFactory<String, Message> {
         val configProps: MutableMap<String, Any> = HashMap()
         configProps[ProducerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapAddress
         configProps[ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG] = StringSerializer::class.java
@@ -44,9 +44,8 @@ internal class KafkaConfig {
         return DefaultKafkaProducerFactory(configProps)
     }
 
-    // Kafka Template 설정
     @Bean
-    fun kafkaTemplate(): KafkaTemplate<String, String> {
+    fun kafkaTemplate(): KafkaTemplate<String, Message> {
         return KafkaTemplate(producerFactory())
     }
 

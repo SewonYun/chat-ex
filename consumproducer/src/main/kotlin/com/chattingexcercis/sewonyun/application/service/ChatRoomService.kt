@@ -1,4 +1,4 @@
-package com.chattingexcercis.sewonyun.service
+package com.chattingexcercis.sewonyun.application.service
 
 import arrow.core.flatMap
 import com.chattingexcercis.sewonyun.application.domain.ChatRoom
@@ -19,7 +19,6 @@ class ChatRoomService(
             userCount = 0
         ).let { chatRoom ->
             runCatching { chatRoomRepository.save(chatRoom) }
-                .onFailure { return Result.failure(it) }
         }.flatMap { savedRoom ->
             Result.success(savedRoom)
         }
@@ -32,7 +31,7 @@ class ChatRoomService(
             chatRoomRepository.save(
                 chatRoom.copy(userCount = chatRoom.userCount + 1)
             )
-        }.onFailure { return Result.failure(it) }
+        }
 
     }
 
@@ -45,7 +44,7 @@ class ChatRoomService(
             chatRoomRepository.save(
                 chatRoom.copy(userCount = userCount().takeIf { it > 0 } ?: 0, isActiveRoom = isActiveRoom())
             )
-        }.onFailure { return Result.failure(it) }
+        }
     }
 
 }

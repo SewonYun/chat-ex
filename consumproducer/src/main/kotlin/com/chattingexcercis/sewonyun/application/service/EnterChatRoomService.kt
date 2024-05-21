@@ -1,4 +1,4 @@
-package com.chattingexcercis.sewonyun.service
+package com.chattingexcercis.sewonyun.application.service
 
 import com.chattingexcercis.sewonyun.application.domain.ChatRoom
 import com.chattingexcercis.sewonyun.application.domain.ChatRoomUserRelation

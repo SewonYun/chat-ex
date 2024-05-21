@@ -4,6 +4,7 @@ import arrow.core.left
 import arrow.core.right
 import com.chattingexcercis.sewonyun.application.domain.User
 import com.chattingexcercis.sewonyun.application.repository.UserRepository
+import com.chattingexcercis.sewonyun.application.service.UserJoinService
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertEquals

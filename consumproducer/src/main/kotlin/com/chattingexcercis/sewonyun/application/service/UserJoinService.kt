@@ -1,4 +1,4 @@
-package com.chattingexcercis.sewonyun.service
+package com.chattingexcercis.sewonyun.application.service
 
 import arrow.core.Either
 import arrow.core.left
