@@ -1,15 +1,27 @@
 package com.chattingexcercis.sewonyun.application.service
 
 import arrow.core.flatMap
+import com.chattingexcercis.sewonyun.application.config.KafkaTopicConfig
 import com.chattingexcercis.sewonyun.application.domain.ChatRoom
 import com.chattingexcercis.sewonyun.application.repository.ChatRoomRepository
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ChatRoomService(
-    private var chatRoomRepository: ChatRoomRepository,
+    @Autowired private var chatRoomRepository: ChatRoomRepository,
+    @Autowired private var kafkaTemplate: KafkaTemplate<String, List<ChatRoom>>
 ) {
+
+    fun produceListUpdate() {
+        chatRoomRepository.findByIsActiveRoom(true).let {
+            kafkaTemplate.send(KafkaTopicConfig.CHAT_LIST_TOPIC, "1", it.map {
+                it.copy(recentMessage = it.messageList.lastOrNull())
+            }.sortedByDescending { it.userCount })
+        }
+    }
 
     fun makeRoom(roomName: String, roomMakerId: Long): Result<ChatRoom> {
         return ChatRoom(
