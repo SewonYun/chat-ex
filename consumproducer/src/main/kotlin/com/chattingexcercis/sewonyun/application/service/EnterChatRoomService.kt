@@ -44,7 +44,7 @@ class EnterChatRoomService(
             }
     }
 
-    fun getList(): Result<List<ChatRoom?>> {
+    fun getList(): Result<List<ChatRoom>> {
         return runCatching { chatRoomRepository.findByIsActiveRoom(true).toList() }
     }
 }

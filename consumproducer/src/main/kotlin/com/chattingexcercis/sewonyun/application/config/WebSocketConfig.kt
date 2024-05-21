@@ -12,7 +12,17 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 class WebSocketConfig : WebSocketMessageBrokerConfigurer {
     override fun registerStompEndpoints(registry: StompEndpointRegistry) {
         // chat client will use this to connect to the server
-        registry.addEndpoint("/ws-chat").setAllowedOrigins("*").withSockJS()
+        registry.addEndpoint("/ws-chat-pub")
+            .setAllowedOrigins("http://localhost:3000")
+            .withSockJS()
+
+        registry.addEndpoint("/ws-chat-sub")
+            .setAllowedOrigins("http://localhost:3000")
+            .withSockJS()
+
+        registry.addEndpoint("/ws-list-sub")
+            .setAllowedOrigins("http://localhost:3000")
+            .withSockJS()
     }
 
     override fun configureMessageBroker(registry: MessageBrokerRegistry) {

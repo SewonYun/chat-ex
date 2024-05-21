@@ -19,6 +19,9 @@ class ChatRoomService(
             userCount = 0
         ).let { chatRoom ->
             runCatching { chatRoomRepository.save(chatRoom) }
+                .onSuccess {
+
+                }
         }.flatMap { savedRoom ->
             Result.success(savedRoom)
         }
