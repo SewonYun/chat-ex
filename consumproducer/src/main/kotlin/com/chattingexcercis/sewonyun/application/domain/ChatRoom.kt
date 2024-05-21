@@ -17,9 +17,9 @@ data class ChatRoom(
     @Column(nullable = false, length = 50)
     val roomMakerId: Long? = null,
 
-    @ColumnDefault("0")
+    @ColumnDefault("false")
     @Column(nullable = false)
-    val isActiveRoom: Long = 0,
+    val isActiveRoom: Boolean = true,
 
     @ColumnDefault("0")
     @Column(nullable = false)

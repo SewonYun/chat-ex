@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface ChatRoomRepository : JpaRepository<ChatRoom, Long> {
 
-    fun findActiveChatRoomList(isActiveRoom: Long = 1): List<ChatRoom?>
+    fun findByIsActiveRoom(isActiveRoom: Boolean): List<ChatRoom>
 
 }
