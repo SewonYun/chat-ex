@@ -37,11 +37,11 @@ class EnterChatRoomService(
                 chatRoomUserRelation.copy(leftAt = Timestamp(System.currentTimeMillis()))
             )
         }
-        .onSuccess { chatRoomUserRelation ->
-            chatRoomRepository.findById(chatRoomUserRelation.chatRoomId!!).let { chatRoom ->
-                chatRoom.map { chatRoomService.decreaseRoomUserCount(it) }
+            .onSuccess { chatRoomUserRelation ->
+                chatRoomRepository.findById(chatRoomUserRelation.chatRoomId!!).let { chatRoom ->
+                    chatRoom.map { chatRoomService.decreaseRoomUserCount(it) }
+                }
             }
-        }
     }
 
     fun getList(): Result<List<ChatRoom?>> {
