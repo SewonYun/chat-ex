@@ -19,12 +19,12 @@ class UserController {
 
         val result = userJoinService.saveUser(nickName)
         return result.fold(
+            { savedUser ->
+                ResponseEntity.ok(mapOf("success" to true, "message" to "가입에 성공했습니다."))
+            },
             { errorMessage ->
                 ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(mapOf("success" to false, "message" to errorMessage))
-            },
-            { savedUser ->
-                ResponseEntity.ok(mapOf("success" to true, "message" to "가입에 성공했습니다."))
             }
         )
     }
